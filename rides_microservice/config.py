@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 
-client = MongoClient("mongodb://neutron2:lolfool2@172.28.128.13/ridesmicroservice")
+client = MongoClient("mongodb://localhost:27017/")
 db = client["ridesmicroservice"]
 
 places = open("AreaNameEnum.csv", "r")
@@ -11,4 +11,4 @@ for i in range(len(areas)):
 areas.pop(0)
 areas.pop(-1)
 
-ip_port = '127.0.0.1:5000'
+ip_port = '127.0.0.1:80'
