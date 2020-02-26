@@ -1,0 +1,31 @@
+users:
+  build: ./usersmicroservice
+  command: python3 -u views.py
+  container_name: users
+  ports:
+    - "8080:80"
+  volumes:
+    - ./usersmicroservice:/app_users
+  links:
+    - mongousers
+
+mongousers:
+  container_name: mongousers
+  image: mongo:4.0.8
+
+rides:
+  build: ./ridesmicroservice
+  command: python3 -u views.py
+  container_name: rides
+  ports:
+    - "8000:80"
+  volumes:
+    - ./ridesmicroservice:/app_rides
+  links:
+    - mongorides
+    - users
+
+mongorides:
+  container_name: mongorides
+  image: mongo:4.0.8
+

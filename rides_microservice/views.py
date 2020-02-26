@@ -1,5 +1,5 @@
 from flask import Flask, request, Response, jsonify
-from rides_microservice.config import db, areas, ip_port
+from rides_microservice.config import db, areas, ip_port, users_hostname
 import requests
 from datetime import datetime
 
@@ -129,6 +129,7 @@ def get_details_of_ride_or_join_ride_or_delete_ride(rideId):
         if response.status_code == 400:
             return Response(status=400)
         return jsonify({})
+
 
 @app.route('/api/v1/list_rides/<username>', methods=["GET"])
 def list_rides_created_or_joined_by_user(username):
@@ -266,7 +267,7 @@ def clear_db():
 
 
 def isUserPresent(username):
-    response = requests.get('http://' + ip_port + '/api/v1/users')
+    response = requests.get('http://' + users_hostname + '/api/v1/users')
     return response.status_code != 400 and username in response.json()
 
 

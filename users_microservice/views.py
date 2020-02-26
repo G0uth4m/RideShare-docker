@@ -1,5 +1,5 @@
 from flask import Flask, request, Response, jsonify
-from users_microservice.config import db, ip_port
+from users_microservice.config import db, ip_port, rides_hostname
 import requests
 import re
 
@@ -149,7 +149,7 @@ def clear_db():
         return Response(status=400)
 
 def check_rides_joined_or_created_by_user(username):
-    response = requests.get('http://' + ip_port + '/api/v1/list_rides/'+username)
+    response = requests.get('http://' + rides_hostname + '/api/v1/list_rides/'+username)
     return response.status_code != 400 and response.json() != []
 
 
