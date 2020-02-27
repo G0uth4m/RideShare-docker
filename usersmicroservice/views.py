@@ -1,5 +1,5 @@
 from flask import Flask, request, Response, jsonify
-from users_microservice.config import db, ip_port, rides_hostname
+from usersmicroservice.config import db, ip_port, rides_hostname
 import requests
 import re
 

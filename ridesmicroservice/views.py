@@ -1,5 +1,5 @@
 from flask import Flask, request, Response, jsonify
-from rides_microservice.config import db, areas, ip_port, users_hostname
+from ridesmicroservice.config import db, areas, ip_port, users_hostname
 import requests
 from datetime import datetime
 
