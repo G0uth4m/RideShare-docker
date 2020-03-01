@@ -1,31 +1,45 @@
-users:
-  build: ./usersmicroservice
-  command: python3 -u views.py
-  container_name: users
-  ports:
-    - "8080:80"
-  volumes:
-    - ./usersmicroservice:/app_users
-  links:
-    - mongousers
+version: '3'
 
-mongousers:
-  container_name: mongousers
-  image: mongo:4.0.8
+services:
+  users:
+    build: ./usersmicroservice
+    image: users:latest
+    command: python3 -u views.py
+    container_name: users
+    ports:
+      - "8080:80"
+    volumes:
+      - ./usersmicroservice:/app_users
+    links:
+      - mongousers
+    networks:
+      main:
+        aliases:
+          - users
 
-rides:
-  build: ./ridesmicroservice
-  command: python3 -u views.py
-  container_name: rides
-  ports:
-    - "8000:80"
-  volumes:
-    - ./ridesmicroservice:/app_rides
-  links:
-    - mongorides
-    - users
+  mongousers:
+    container_name: mongousers
+    image: mongo:4.0.8
 
-mongorides:
-  container_name: mongorides
-  image: mongo:4.0.8
+  rides:
+    build: ./ridesmicroservice
+    image: rides:latest
+    command: python3 -u views.py
+    container_name: rides
+    ports:
+      - "8000:80"
+    volumes:
+      - ./ridesmicroservice:/app_rides
+    links:
+      - mongorides
+    networks:
+      main:
+        aliases:
+          - rides
 
+  mongorides:
+    container_name: mongorides
+    image: mongo:4.0.8
+
+  networks:
+    main:
