@@ -41,5 +41,5 @@ services:
     container_name: mongorides
     image: mongo:4.0.8
 
-  networks:
-    main:
+networks:
+  main:
